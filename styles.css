@@ -38,16 +38,18 @@ body {
     margin-bottom: 5%;
     width: 90%;
     height: 20%;
-    border: solid 0px transparent;
-    border-radius: 8px;
 }
 
 #BtnArr {
+    display: flex;
+    flex-wrap: wrap;
     align-self: center;
     background-color: #94e344;
-    margin-top: 5%;
     margin-bottom: 5%;
     width: 90%;
-    height: 60%;
-    border: solid 0px transparent;
+    height: 70%;
+}
+
+#BtnArr button {
+    min-width: 25%;
 }
