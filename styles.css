@@ -46,10 +46,36 @@ body {
     align-self: center;
     background-color: #94e344;
     margin-bottom: 5%;
+    padding: 0%;
+    border: 0px;
     width: 90%;
     height: 70%;
 }
 
-#BtnArr button {
-    min-width: 25%;
+#TopRow {
+    display: flex;
+    width: 100%;
+    height: 20%;
+}
+
+#TopRow button {
+    width: 25%;
+    height: 100%;
+}
+
+#NumPad {
+    display: flex;
+    flex-wrap: wrap;
+    width: 75%;
+    height: 80%;
+}
+
+#NumPad button {
+    width: 33.3%;
+    height: 25%;
+}
+
+#Equals {
+    height: 80%;
+    width: 25%;
 }
