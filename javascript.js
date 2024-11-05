@@ -2,6 +2,7 @@ var topRowValues = ['÷','*','-','+'];
 var numPadValues = ['7','8','9','4','5','6','1','2','3','0'];
 var topRowElement = document.querySelector("#TopRow");
 var numPadElemenet = document.querySelector("#NumPad");
+var equalButton = document.querySelector("#Equals");
 
 var inputString = document.querySelector ("#InputAsString");
 var resultString = document.querySelector ("#UserResultCalc");
@@ -20,6 +21,7 @@ function generateNumPad()
     numPadValues.forEach(value => createButtons(value, numPadElemenet, numberPressed));
     createButtons('.', numPadElemenet, numberPressed);
     createButtons('CE', numPadElemenet, clearEverything);
+    equalButton.onclick = () => equalPressed();
 }
 
 function createButtons(value, element, func)
@@ -34,17 +36,17 @@ function numberPressed(value)
 {
     let index =  calculation.length-1;
     let newNumber = calculation[index].id != 'number';
-    console.log(newNumber);
     let isDecimal = value == '.';
+    let checkForDecimal = calculation[index].val.search(/\./) == -1;
 
     if(newNumber) {
         if(isDecimal) value = '0.';
         calculation.push({id: 'number', val: value});
     }
-    else if(isDecimal && calculation[index].val.search(".") == -1) {
+    else if(!isDecimal) {
         calculation[index].val += value;
     }
-    else {
+    else if (checkForDecimal) {
         calculation[index].val += value;
     }
 
@@ -66,7 +68,8 @@ function operatorPressed(value)
 
 function equalPressed()
 {
-
+    calculation = [{id: 'number', val: inputUpdate()}];
+    inputUpdate();
 }
 
 function clearEverything(value)
@@ -95,15 +98,13 @@ function inputUpdate()
     });
 
     resultString.textContent = Math.round(sum*100)/100;
+    return sum;
 }
 
 function runCalculation(sum, operator, val)
 {
     sum = parseFloat(sum);
     val = parseFloat(val);
-
-    console.log(operator);
-    console.log(operator == '+');
 
     switch(operator)
     {
