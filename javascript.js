@@ -53,7 +53,6 @@ function numberPressed(value)
 
 function operatorPressed(value)
 {
-    value = ` ${value} `;
     let index =  calculation.length-1;
     if(calculation[index].id == 'operator')
     {
@@ -79,7 +78,49 @@ function clearEverything(value)
 function inputUpdate()
 {
     inputString.textContent = '';
+
+    let sum = calculation[0].val;
+    let operator = '';
+
     calculation.forEach(element => {
         inputString.textContent += element.val + ' ';
+        
+        if(element.id == 'operator') {
+            operator = element.val;
+        }
+        else if(element.id == 'number' && operator != '') {
+            sum = runCalculation(sum, operator, element.val);
+            operator = '';
+        }
     });
+
+    resultString.textContent = Math.round(sum*100)/100;
+}
+
+function runCalculation(sum, operator, val)
+{
+    sum = parseFloat(sum);
+    val = parseFloat(val);
+
+    console.log(operator);
+    console.log(operator == '+');
+
+    switch(operator)
+    {
+        default:
+            console.log("Something Broke")
+            break;
+        case '+':
+            return sum + val;
+        case '-':
+            return sum - val;
+        case '*':
+            return sum * val;
+        case '÷':
+            if(sum == 0 || val == 0)
+            {
+                return "NaN";
+            }
+            return sum / val;
+    }
 }
